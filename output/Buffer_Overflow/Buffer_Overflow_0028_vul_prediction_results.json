@@ -1,0 +1,145 @@
+{
+  "final_prediction": {
+    "class": "Path_Traversal",
+    "confidence": 0.4000000059604645,
+    "method": "average_probabilities"
+  },
+  "voting_prediction": {
+    "class": "Path_Traversal",
+    "votes": 2,
+    "total_functions": 5,
+    "method": "majority_vote"
+  },
+  "all_class_scores": {
+    "Safe": 0.0,
+    "Buffer_Overflow": 0.20000000298023224,
+    "Command_Injection": 0.0,
+    "Path_Traversal": 0.4000000059604645,
+    "SQL_Injection": 0.4000000059604645
+  },
+  "function_predictions": [
+    {
+      "function_name": "BufferOverflowVulnerability.main:<unresolvedSignature>(1)",
+      "predicted_class": "Buffer_Overflow",
+      "confidence": 1.0,
+      "probabilities": {
+        "Safe": 0.0,
+        "Buffer_Overflow": 1.0,
+        "Command_Injection": 0.0,
+        "Path_Traversal": 0.0,
+        "SQL_Injection": 0.0
+      },
+      "code_sequence": "String args Scanner new System.in System in System.out.print Enter System.out out userInput scanner....",
+      "graph_stats": {
+        "nodes": 82,
+        "ast_edges": 156,
+        "cfg_edges": 132,
+        "pdg_edges": 80
+      }
+    },
+    {
+      "function_name": "<unresolvedNamespace>.length:<unresolvedSignature>(0)",
+      "predicted_class": "Path_Traversal",
+      "confidence": 1.0,
+      "probabilities": {
+        "Safe": 0.0,
+        "Buffer_Overflow": 0.0,
+        "Command_Injection": 0.0,
+        "Path_Traversal": 1.0,
+        "SQL_Injection": 0.0
+      },
+      "code_sequence": "p0 RET",
+      "graph_stats": {
+        "nodes": 5,
+        "ast_edges": 8,
+        "cfg_edges": 0,
+        "pdg_edges": 0
+      }
+    },
+    {
+      "function_name": "<operator>.alloc",
+      "predicted_class": "SQL_Injection",
+      "confidence": 1.0,
+      "probabilities": {
+        "Safe": 0.0,
+        "Buffer_Overflow": 0.0,
+        "Command_Injection": 0.0,
+        "Path_Traversal": 0.0,
+        "SQL_Injection": 1.0
+      },
+      "code_sequence": "p0 p1 RET",
+      "graph_stats": {
+        "nodes": 7,
+        "ast_edges": 12,
+        "cfg_edges": 0,
+        "pdg_edges": 0
+      }
+    },
+    {
+      "function_name": "java.util.Scanner.nextLine:<unresolvedSignature>(0)",
+      "predicted_class": "Path_Traversal",
+      "confidence": 1.0,
+      "probabilities": {
+        "Safe": 0.0,
+        "Buffer_Overflow": 0.0,
+        "Command_Injection": 0.0,
+        "Path_Traversal": 1.0,
+        "SQL_Injection": 0.0
+      },
+      "code_sequence": "p0 RET",
+      "graph_stats": {
+        "nodes": 5,
+        "ast_edges": 8,
+        "cfg_edges": 0,
+        "pdg_edges": 0
+      }
+    },
+    {
+      "function_name": "<unresolvedNamespace>.getChars:<unresolvedSignature>(4)",
+      "predicted_class": "SQL_Injection",
+      "confidence": 1.0,
+      "probabilities": {
+        "Safe": 0.0,
+        "Buffer_Overflow": 0.0,
+        "Command_Injection": 0.0,
+        "Path_Traversal": 0.0,
+        "SQL_Injection": 1.0
+      },
+      "code_sequence": "p0 p1 p2 p3 p4 RET",
+      "graph_stats": {
+        "nodes": 13,
+        "ast_edges": 24,
+        "cfg_edges": 0,
+        "pdg_edges": 0
+      }
+    }
+  ],
+  "analysis": {
+    "total_functions": 11,
+    "critical_functions": 5,
+    "function_patterns": {
+      "USER_MAIN": 1,
+      "CONSTRUCTOR": 2,
+      "UNRESOLVED_LIB": 4,
+      "OPERATOR": 3,
+      "JAVA_LIB": 1
+    },
+    "vulnerability_indicators": [
+      "Buffer_Overflow",
+      "Buffer_Overflow",
+      "Buffer_Overflow",
+      "Command_Injection",
+      "Buffer_Overflow"
+    ]
+  },
+  "summary": {
+    "total_functions": 11,
+    "critical_functions": 5,
+    "tokenized_functions": 5,
+    "prediction_distribution": {
+      "Buffer_Overflow": 1,
+      "Path_Traversal": 2,
+      "SQL_Injection": 2
+    }
+  }
+}
