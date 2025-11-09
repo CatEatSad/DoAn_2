@@ -238,10 +238,21 @@ class VulnerabilityDataset(Dataset):
             return_tensors='pt'
         )
         
-        # Simple encoding: average token embeddings
-        # (In practice, you'd use GraphCodeBERT model here)
-        # For now, create random features (will be replaced in model)
-        node_features = torch.randn(len(nodes), 768)
+        # Use tokenizer embeddings instead of random
+        # Get embedding layer from tokenizer's vocab
+        input_ids = encoded['input_ids']  # (num_nodes, seq_len)
+        
+        # Simple approach: Use mean of token IDs as features
+        # Normalize to [0, 1] range
+        vocab_size = self.tokenizer.vocab_size
+        node_features = input_ids.float() / vocab_size  # Normalize
+        
+        # Pad or truncate to 768 dims
+        if node_features.shape[1] < 768:
+            padding = torch.zeros(node_features.shape[0], 768 - node_features.shape[1])
+            node_features = torch.cat([node_features, padding], dim=1)
+        else:
+            node_features = node_features[:, :768]
         
         return node_features
     

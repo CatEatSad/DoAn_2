@@ -44,8 +44,7 @@ class Trainer:
             self.optimizer, 
             mode='max', 
             factor=0.5, 
-            patience=5, 
-            verbose=True
+            patience=5
         )
         
         # Tracking
@@ -166,7 +165,12 @@ class Trainer:
             self.val_accuracies.append(val_metrics['accuracy'])
             
             # Learning rate scheduling
+            old_lr = self.optimizer.param_groups[0]['lr']
             self.scheduler.step(val_metrics['accuracy'])
+            new_lr = self.optimizer.param_groups[0]['lr']
+            
+            if new_lr != old_lr:
+                print(f"  📉 Learning rate reduced: {old_lr:.6f} → {new_lr:.6f}")
             
             # Print epoch results
             print(f"\nResults:")
@@ -258,13 +262,22 @@ class Trainer:
 def main():
     """Main training function"""
     
-    # Config
-    ROOT_DIR = r"c:\Users\abcdx\OneDrive\Máy tính\renew"
+    # Config - Auto detect environment
+    import os
+    if os.path.exists('/content'):
+        # Running on Google Colab
+        ROOT_DIR = '/content/DoAn_2'
+    else:
+        # Running locally
+        ROOT_DIR = r"c:\Users\abcdx\OneDrive\Máy tính\renew"
+    
     BATCH_SIZE = 8
     NUM_EPOCHS = 50
     LEARNING_RATE = 1e-3
     DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
     
+    print(f"Environment: {'Google Colab' if '/content' in ROOT_DIR else 'Local'}")
+    print(f"Root directory: {ROOT_DIR}")
     print(f"Device: {DEVICE}")
     
     # Create dataloaders
